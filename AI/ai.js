@@ -12,9 +12,9 @@ const prompt = `You are an expert career advisor with deep knowledge of various 
       "title": "Software Engineer",
       "description": "Designs and develops software applications.",
       "education_requirements": "Bachelor's in Computer Science or a related field",
-      "best_companies": ["Google", 2:"Netflix", 3:"Amazon"],
-      "career_paths": ["Junior Developer", 2:"Software Engineer", 3:"Senior Software Engineer", 4:"Software Architect"],
-      "required_skills": ["Problem-Solving", 2:"Programming", 3:"Data Structures & Algorithms"],
+      "best_companies": ["Google", "Netflix", "Amazon"],
+      "career_paths": ["Junior Developer", "Software Engineer", "Senior Software Engineer", "Software Architect"],
+      "required_skills": ["Problem-Solving", "Programming", "Data Structures & Algorithms"],
       "job_outlook": "High demand due to increasing reliance on technology."
     }
   ]
@@ -48,7 +48,6 @@ async function run() {
 
         responseText = responseText.replace(/```json|```/g, "").trim();
         const jsonData = JSON.parse(responseText);
-        console.log(jsonData.career_recommendations[0].career_paths)
         console.log("Career Recommendations:", jsonData);
 
         return jsonData; 
