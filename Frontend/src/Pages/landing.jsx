@@ -34,30 +34,30 @@ function Landing() {
         <h3 className="text-3xl text-black font-bold pt-10 pb-6">
           How It Works
         </h3>
-        <p class="text-gray-500 mt-2">
+        <p className="text-gray-500 mt-2">
           Our data-driven approach combines AI analysis with career expertise to
           help you make confident decisions about your future.
         </p>
 
-        <div class="mt-5 flex justify-between gap-6 pb-20">
-          <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl shadow-blue-300 transition duration-300 flex flex-col items-center text-center m-7">
-            <h3 class="mt-4 text-lg font-semibold">AI Assessment</h3>
-            <p class="text-gray-500 mt-2">
+        <div className="mt-5 flex justify-between gap-6 pb-20">
+          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl shadow-blue-300 transition duration-300 flex flex-col items-center text-center m-7">
+            <h3 className="mt-4 text-lg font-semibold">AI Assessment</h3>
+            <p className="text-gray-500 mt-2">
               Complete our research-backed assessment that analyzes your unique
               traits and preferences.
             </p>
           </div>
 
-          <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl shadow-blue-300 transition duration-300 flex flex-col items-center text-center m-7">
-            <h3 class="mt-4 text-lg font-semibold">Market Insightst</h3>
-            <p class="text-gray-500 mt-2">
+          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl shadow-blue-300 transition duration-300 flex flex-col items-center text-center m-7">
+            <h3 className="mt-4 text-lg font-semibold">Market Insightst</h3>
+            <p className="text-gray-500 mt-2">
             Get valuable data on salary expectations, job growth, and required education for each path.
             </p>
           </div>
         
-          <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl shadow-blue-300 transition duration-300 flex flex-col items-center text-center m-7">
-            <h3 class="mt-4 text-lg font-semibold">Personalized Matches</h3>
-            <p class="text-gray-500 mt-2">
+          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl shadow-blue-300 transition duration-300 flex flex-col items-center text-center m-7">
+            <h3 className="mt-4 text-lg font-semibold">Personalized Matches</h3>
+            <p className="text-gray-500 mt-2">
             Receive tailored career recommendations that align with your skills, interests, and values.
             </p>
           </div>
