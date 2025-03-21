@@ -21,7 +21,7 @@ const Nav=()=>{
               }  
         >Start Assesment</NavLink>
         <NavLink 
-            to='/about'
+            to='/about'   
             className={({ isActive }) =>
                 `px-4 py-2 hover:text-yellow-600 transition duration-300 border-b-2 ${
                   isActive ? "border-blue-400" : "border-transparent"

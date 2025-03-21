@@ -16,9 +16,8 @@ if (!MONGO_URL) {
     process.exit(1);
 }
 
-// Enhanced connection options
 const options = {
-    serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+    serverSelectionTimeoutMS: 30000, 
     socketTimeoutMS: 45000,
     heartbeatFrequencyMS: 2000,
     retryWrites: true,
