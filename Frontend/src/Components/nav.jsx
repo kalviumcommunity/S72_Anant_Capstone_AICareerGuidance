@@ -31,15 +31,15 @@ const Nav=()=>{
         </div>
 
         <div className='flex justify-between'>
-        <NavLink 
-            to='/login'
+        <a 
+            href='/login'
             className='border border-gray-300 px-4 py-2 rounded-md mx-3'
-        >Login</NavLink>
+        >Login</a>
         
-        <NavLink 
-            to='/signup'
+        <a 
+            href='/signup'
             className='bg-blue-600 text-white px-4 py-2 rounded-md'
-        >Sign Up</NavLink>
+        >Sign Up</a>
         </div>
     </div>
     )

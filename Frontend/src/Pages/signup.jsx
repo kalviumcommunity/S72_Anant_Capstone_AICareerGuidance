@@ -42,7 +42,7 @@ function SignUp() {
         </div>
       </div>
 
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Full Name"
@@ -66,7 +66,6 @@ function SignUp() {
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
-          onSubmit={handleSubmit}
         >
           Sign Up
         </button>
