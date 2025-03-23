@@ -1,6 +1,12 @@
 import React, { useState } from "react";
+import {auth,googleProvider} from "../firebase"
+import {  signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
+
+  const navigate=useNavigate()
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +21,15 @@ function SignUp() {
     console.log("Working successfully")
   };
 
-  
+    const googleLogin=async ()=>{
+      try{
+      const result=await signInWithPopup(auth,googleProvider)
+      console.log(result.user)
+      navigate('/')
+      }catch(err){
+        console.error(err.message)
+      }
+    }
 
   return (
     <div className="flex justify-center items-center min-h-screen w-full bg-blue-50">
@@ -24,7 +38,10 @@ function SignUp() {
         Create an Account
       </h2>
 
-      <button className="w-full flex items-center justify-center gap-2 border py-2 rounded-md shadow-md hover:bg-gray-100">
+      <button 
+      className="w-full flex items-center justify-center gap-2 border py-2 rounded-md shadow-md hover:bg-gray-100"
+      onClick={googleLogin}
+      >
         <img
           src="https://www.svgrepo.com/show/475656/google-color.svg"
           className="w-5 h-5"
