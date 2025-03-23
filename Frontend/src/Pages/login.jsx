@@ -14,7 +14,6 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newForm = new FormData();
-    newForm.append("name", name);
     newForm.append("email", email);
     newForm.append("password", password);
 
