@@ -1,6 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+import { auth,googleProvider } from "../firebase";
+import { signInWithPopup } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
+
 
 function Login() {
+
+  const [email,setEmail]=useState("")
+  const [password,setPassword]=useState("")
+  const navigate=useNavigate()
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newForm = new FormData();
+    newForm.append("name", name);
+    newForm.append("email", email);
+    newForm.append("password", password);
+
+    console.log("Working successfully")
+  };
+
+
+  const googleLogin=async ()=>{
+    try{
+    const result=await signInWithPopup(auth,googleProvider)
+    console.log(result.user)
+    navigate('/')
+    }catch(err){
+      console.error(err.message)
+    }
+  }
+
+
   return (
     <div className="flex justify-center items-center min-h-screen w-full bg-blue-50">
     <div className=" p-8 rounded-lg shadow-md max-w-md ">
@@ -8,7 +40,10 @@ function Login() {
         Login to  Account
       </h2>
 
-      <button className="w-full flex items-center justify-center gap-2 border py-2 rounded-md shadow-md hover:bg-gray-100">
+      <button 
+      className="w-full flex items-center justify-center gap-2 border py-2 rounded-md shadow-md hover:bg-gray-100"
+      onClick={googleLogin}
+      >
         <img
           src="https://www.svgrepo.com/show/475656/google-color.svg"
           className="w-5 h-5"
@@ -26,18 +61,20 @@ function Login() {
         </div>
       </div>
 
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={handleSubmit}>
 
         <input
           type="email"
           placeholder="Email"
           className="w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-400"
+          onChange={(e)=> setEmail(e.target.value)}
 
         />
         <input
           type="password"
           placeholder="Password"
           className="w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-400"
+          onChange={(e)=> setPassword(e.target.value)}
         />
 
         <button
