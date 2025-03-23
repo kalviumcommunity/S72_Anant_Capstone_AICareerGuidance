@@ -6,8 +6,9 @@ import {getAuth, GoogleAuthProvider} from "firebase/auth"
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
 const firebaseConfig = {
-  apiKey: "AIzaSyB8OnYCtRZTd9FP0DF4F9O94GkNIiAaTzg",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "capstone-d73ca.firebaseapp.com",
   projectId: "capstone-d73ca",
   storageBucket: "capstone-d73ca.firebasestorage.app",
