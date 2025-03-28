@@ -1,25 +1,60 @@
 import { NavLink } from "react-router-dom";
-
 import { auth } from "../firebase";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 
 const Nav = () => {
-  const [user, setUser] = useState(null);
+  const [firebaseUser, setFirebaseUser] = useState(null);
+  const [jwtUser, setJwtUser] = useState(null);
+  const [jwtToken, setJwtToken] = useState(localStorage.getItem("jwtToken")); // Track token
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unSubscribe();
-  }, []);
+    const fetchJwtUser = async () => {
+      if (!jwtToken) return;
+
+      try {
+        const res = await fetch("http://localhost:5000/auth/user", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          setJwtUser(data.user);
+        } else {
+          setJwtUser(null);
+        }
+      } catch (error) {
+        console.error("JWT Fetch Error:", error);
+        setJwtUser(null);
+      }
+    };
+
+    fetchJwtUser();
+  }, [jwtToken]); // Fix: Depend on `jwtToken`
 
   const handleSignOut = async () => {
-    await signOut(auth);
+    if (firebaseUser) {
+      await signOut(auth);
+      setFirebaseUser(null);
+    }
+
+    if (jwtUser) {
+      localStorage.removeItem("jwtToken");
+      setJwtUser(null);
+      setJwtToken(null); // Fix: Update token state
+      window.dispatchEvent(new Event("storage"))
+    }
   };
 
+  const user = firebaseUser || jwtUser;
+  const defaultProfilePic = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg";
+
   return (
-    <div className="flex items-center justify-between space-x-6 w-full  py-2">
+    <div className="flex items-center justify-between space-x-6 w-full py-2">
       <div className="flex justify-between px-15">
         <NavLink
           to="/"
@@ -39,7 +74,7 @@ const Nav = () => {
             }`
           }
         >
-          Start Assesment
+          Start Assessment
         </NavLink>
         <NavLink
           to="/about"
@@ -58,10 +93,9 @@ const Nav = () => {
           <>
             <NavLink to="/profile">
               <img
-                src={user.photoURL || "https://via.placeholder.com/40"}
-                alt="Profile Picture"
+                src={firebaseUser?.photoURL || jwtUser?.profilePic || defaultProfilePic}
+                alt="Profile"
                 className="w-10 h-10 rounded-full cursor-pointer mx-4"
-                
               />
             </NavLink>
             <button
@@ -79,7 +113,6 @@ const Nav = () => {
             >
               Login
             </a>
-
             <a
               href="/signup"
               className="bg-blue-600 text-white px-4 py-2 rounded-md"

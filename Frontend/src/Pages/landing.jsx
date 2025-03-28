@@ -15,11 +15,11 @@ function Landing() {
       <Header />
       <div className="w-full bg-[url(../assets/hero.jpg)] bg-cover py-35 px-10 flex flex-col items-center justify-center">
         <p className="text-xs uppercase tracking-wide bg-blue-100 text-blue-600 rounded-full px-5 py-1 w-fit text-center mb-8">
-          AI-POWERED CAREER GUIDANCE
+          AI-POWERED CAREER GUIDE
         </p>
         <h3 className="text-8xl font-bold text-center">
-          <span className="text-black">Discover Your Perfect</span> <br />
-          <span className="text-blue-500"> Career Path</span>
+          <span className="text-black">Unlock Your Passion</span> <br />
+          <span className="text-blue-500"> Shape Your Future</span>
         </h3>
         <div className="pt-15">
           <NavLink to="/test">
@@ -40,24 +40,22 @@ function Landing() {
           How It Works
         </h3>
         <p className="text-gray-500 mt-2">
-          Our data-driven approach combines AI analysis with career expertise to
-          help you make confident decisions about your future.
+        Our intelligent career platform leverages AI-driven insights and industry trends to guide you toward the right career path.
         </p>
 
         <div className="mt-5 flex justify-between gap-6 pb-20">
           <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl shadow-blue-300 transition duration-300 flex flex-col items-center text-center m-7">
-            <h3 className="mt-4 text-lg font-semibold">AI Assessment</h3>
+            <h3 className="mt-4 text-lg font-semibold">Smart Career Assessment</h3>
             <p className="text-gray-500 mt-2">
-              Complete our research-backed assessment that analyzes your unique
-              traits and preferences.
+            Take a  quiz to uncover your strengths, interests, and ideal career options.
             </p>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl shadow-blue-300 transition duration-300 flex flex-col items-center text-center m-7">
-            <h3 className="mt-4 text-lg font-semibold">Market Insightst</h3>
+            <h3 className="mt-4 text-lg font-semibold">Real-Time Industry Trends
+            </h3>
             <p className="text-gray-500 mt-2">
-            Get valuable data on salary expectations, job growth, and required education for each path.
-            </p>
+            Stay ahead with up-to-date job market insights, including demand, salaries, and future growth potential.</p>
           </div>
         
           <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl shadow-blue-300 transition duration-300 flex flex-col items-center text-center m-7">
