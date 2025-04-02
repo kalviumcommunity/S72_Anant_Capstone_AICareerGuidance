@@ -1,40 +1,65 @@
 import { NavLink } from "react-router-dom";
 import { auth } from "../firebase";
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 
 const Nav = () => {
   const [firebaseUser, setFirebaseUser] = useState(null);
   const [jwtUser, setJwtUser] = useState(null);
-  const [jwtToken, setJwtToken] = useState(localStorage.getItem("jwtToken")); // Track token
+  const [jwtToken, setJwtToken] = useState(localStorage.getItem("jwtToken"));
 
+  // 🔹 Check Firebase Auth on Mount
   useEffect(() => {
-    const fetchJwtUser = async () => {
-      if (!jwtToken) return;
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setFirebaseUser(user);
+    });
 
-      try {
-        const res = await fetch("http://localhost:5000/auth/user", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${jwtToken}`,
-            "Content-Type": "application/json",
-          },
-        });
+    // Check if there's a logged-in user immediately (Fix)
+    if (auth.currentUser) {
+      setFirebaseUser(auth.currentUser);
+    }
 
-        if (res.ok) {
-          const data = await res.json();
-          setJwtUser(data.user);
-        } else {
-          setJwtUser(null);
-        }
-      } catch (error) {
-        console.error("JWT Fetch Error:", error);
+    return () => unsubscribe();
+  }, []);
+
+  // 🔹 Fetch JWT user when token exists
+  const fetchJwtUser = async () => {
+    if (!jwtToken) return;
+
+    try {
+      const res = await fetch("http://localhost:5000/auth/user", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setJwtUser(data.user);
+      } else {
         setJwtUser(null);
       }
-    };
+    } catch (error) {
+      console.error("JWT Fetch Error:", error);
+      setJwtUser(null);
+    }
+  };
 
+  useEffect(() => {
     fetchJwtUser();
-  }, [jwtToken]); // Fix: Depend on `jwtToken`
+  }, [jwtToken]);
+
+  // 🔹 Detect JWT login changes without refreshing
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setJwtToken(localStorage.getItem("jwtToken"));
+      fetchJwtUser();
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
   const handleSignOut = async () => {
     if (firebaseUser) {
@@ -45,13 +70,14 @@ const Nav = () => {
     if (jwtUser) {
       localStorage.removeItem("jwtToken");
       setJwtUser(null);
-      setJwtToken(null); // Fix: Update token state
-      window.dispatchEvent(new Event("storage"))
+      setJwtToken(null);
+      window.dispatchEvent(new Event("storage"));
     }
   };
 
   const user = firebaseUser || jwtUser;
-  const defaultProfilePic = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg";
+  const defaultProfilePic =
+    "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg";
 
   return (
     <div className="flex items-center justify-between space-x-6 w-full py-2">
