@@ -27,6 +27,9 @@ function Login() {
       });
 
       localStorage.setItem("jwtToken", res.data.token); // Save JWT token
+      localStorage.setItem("userId", res.data.user._id); // Save user._id
+
+      
       console.log("Login successful");
       navigate("/");
       

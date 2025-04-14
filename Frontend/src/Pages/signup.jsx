@@ -19,6 +19,8 @@ function SignUp() {
     try {
       const res=await axios.post("http://localhost:5000/auth/signup",{name,email,password})
       localStorage.setItem("jwtToken",res.data.token)
+      localStorage.setItem("userId", res.data.user._id); // Save user._id
+
       console.log("SignUp successfull")
       navigate('/')
     } catch (error) {
