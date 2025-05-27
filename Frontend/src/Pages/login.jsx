@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import axios from 'axios'
 import { auth,googleProvider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
@@ -9,15 +9,35 @@ function Login() {
 
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
+  const [error,setError]=useState(null)
   const navigate=useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const newForm = new FormData();
     newForm.append("email", email);
     newForm.append("password", password);
 
-    console.log("Working successfully")
+
+
+    console.log(email)
+    console.log(password)
+
+    try {
+
+      const res = await axios.post("http://localhost:5000/auth/login", {
+        email,
+        password,
+      });
+
+      localStorage.setItem("jwtToken", res.data.token); // Save JWT token
+      console.log("Login successful");
+      navigate("/");
+      
+    } catch (error) {
+      setError(error.response?.data?.message || "Login Failes . Try again Later!!")
+    }
   };
 
 
@@ -82,6 +102,9 @@ function Login() {
         >
           Login
         </button>
+
+      {error && <p className='text-red-600 text-center'>{error}</p>}
+
       </form>
 
       <p className="mt-4 text-center text-gray-600">

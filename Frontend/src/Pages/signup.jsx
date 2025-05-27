@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {auth,googleProvider} from "../firebase"
 import {  signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"
 
 function SignUp() {
 
@@ -11,14 +12,19 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newForm = new FormData();
-    newForm.append("name", name);
-    newForm.append("email", email);
-    newForm.append("password", password);
+  const [error,setError]=useState(null)
 
-    console.log("Working successfully")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res=await axios.post("http://localhost:5000/auth/signup",{name,email,password})
+      localStorage.setItem("jwtToken",res.data.token)
+      console.log("SignUp successfull")
+      navigate('/')
+    } catch (error) {
+      setError(error.message)
+    }
+    
   };
 
     const googleLogin=async ()=>{
@@ -86,6 +92,7 @@ function SignUp() {
         >
           Sign Up
         </button>
+        {error && <p className="text-red-500 text-center">{error}</p>}
       </form>
 
       <p className="mt-4 text-center text-gray-600">
