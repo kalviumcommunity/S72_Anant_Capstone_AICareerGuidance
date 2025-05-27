@@ -15,6 +15,11 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const newForm = new FormData();
+    newForm.append("email", email);
+    newForm.append("password", password);
+
+
 
     console.log(email)
     console.log(password)
