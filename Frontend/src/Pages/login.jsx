@@ -10,6 +10,7 @@ function Login() {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
   const [error, setError] = useState("");
+
   const navigate=useNavigate()
 
   const handleSubmit = async (e) => {
@@ -23,6 +24,7 @@ function Login() {
 
     try {
       const res = await axios.post("http://localhost:5000/api/auth/login", {
+
         email,
         password,
       });
@@ -33,11 +35,13 @@ function Login() {
       localStorage.setItem("userName", res.data.user.name);
       localStorage.setItem("userEmail", res.data.user.email);
 
+
       console.log("Login successful");
       navigate("/");
       
     } catch (error) {
       setError(error.response?.data?.message || "Login failed. Please try again.");
+
     }
   };
 
@@ -120,6 +124,7 @@ function Login() {
           </a>
         </p>
       </div>
+
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import './Styles/Styles.css'
 import {Landing,Test,AboutMe,SignUp,Login, Profile} from './Routes/routes'
+
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import { AuthProvider } from './Components/AuthProvider'
 import ProtectedRoute from './Components/ProtectedRoute'
@@ -25,6 +26,7 @@ function App() {
           }/>
         </Routes>
       </AuthProvider>
+
     </BrowserRouter>
   )
 }

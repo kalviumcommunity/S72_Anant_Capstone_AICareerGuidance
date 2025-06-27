@@ -3,6 +3,7 @@ import axios from 'axios';
 import {auth,googleProvider} from "../firebase"
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"
 
 function SignUp() {
 
@@ -45,6 +46,7 @@ function SignUp() {
     } catch (error) {
       setError(error.response?.data?.message || "Signup failed. Please try again.");
     }
+
   };
 
     const googleLogin=async ()=>{
@@ -130,6 +132,7 @@ function SignUp() {
           </a>
         </p>
       </div>
+
     </div>
   );
 }

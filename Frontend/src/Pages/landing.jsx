@@ -20,6 +20,7 @@ function Landing() {
         <h3 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-center leading-tight">
           <span className="text-black">Discover Your Perfect</span> <br />
           <span className="text-blue-500"> Career Path</span>
+
         </h3>
         <div className="pt-8 md:pt-12 flex flex-col sm:flex-row gap-4 md:gap-8">
           <NavLink to="/test">
@@ -56,6 +57,7 @@ function Landing() {
             <p className="text-gray-500 mt-2 text-xs md:text-base">
               Get valuable data on salary expectations, job growth, and required education for each path.
             </p>
+
           </div>
         
           <div className="bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-xl shadow-blue-300 transition duration-300 flex flex-col items-center text-center m-3 md:m-7 w-full md:w-1/3">

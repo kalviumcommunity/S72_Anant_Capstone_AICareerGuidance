@@ -23,6 +23,8 @@ const Nav = () => {
     return null;
   };
 
+
+  // 🔹 Check Firebase Auth on Mount
   useEffect(() => {
     setUser(getUserFromStorage());
     // Listen for changes to localStorage (profilePicUrl)
@@ -44,7 +46,12 @@ const Nav = () => {
     localStorage.removeItem("profilePicUrl");
     setUser(null);
     navigate("/");
+
   };
+
+  const user = firebaseUser || jwtUser;
+  const defaultProfilePic =
+    "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg";
 
   return (
     <nav className="relative w-full">
@@ -142,6 +149,7 @@ const Nav = () => {
             </>
           )}
         </div>
+
       </div>
     </nav>
   );

@@ -18,10 +18,14 @@ app.use('/api/user', userRoute); // Use the new user route
 app.use('/api/auth', authRoute); // Use the auth route
 app.use('/uploads', express.static('uploads'));
 
+
 const PORT = process.env.PORT
 const MONGO_URL = process.env.MONGO_URL;
 
 console.log("\n🔄 Starting MongoDB connection process...");
+
+
+app.use('/auth',authRoutes)
 
 if (!MONGO_URL) {
     console.error("❌ MONGO_URL is not defined in .env file");
