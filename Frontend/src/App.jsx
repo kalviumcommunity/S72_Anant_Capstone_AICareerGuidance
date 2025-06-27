@@ -1,21 +1,32 @@
 import './Styles/Styles.css'
-import {Landing,Test,AboutMe,SignUp,Login} from './Routes/routes'
-
-import AuthWrapper from './Components/AuthWrapper'
+import {Landing,Test,AboutMe,SignUp,Login, Profile} from './Routes/routes'
 
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import { AuthProvider } from './Components/AuthProvider'
+import ProtectedRoute from './Components/ProtectedRoute'
 
 function App() {
-
   return (
     <BrowserRouter>
-    <Routes>
-    <Route path='/' element={<Landing/>}/>
-    <Route path='/about' element={<AboutMe/>}/>
-    <Route path='/test' element={<AuthWrapper><Test/></AuthWrapper>}/>
-    <Route path='/signup' element={<SignUp/>}/>
-    <Route path='/login' element={<Login/>}/>
-    </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path='/' element={<Landing/>}/>
+          <Route path='/about' element={<AboutMe/>}/>
+          <Route path='/test' element={
+            <ProtectedRoute>
+              <Test/>
+            </ProtectedRoute>
+          }/>
+          <Route path='/signup' element={<SignUp/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/profile' element={
+            <ProtectedRoute>
+              <Profile/>
+            </ProtectedRoute>
+          }/>
+        </Routes>
+      </AuthProvider>
+
     </BrowserRouter>
   )
 }
