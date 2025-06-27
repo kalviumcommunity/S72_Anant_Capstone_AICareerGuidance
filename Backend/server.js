@@ -3,8 +3,20 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const cors = require('cors')
+const Question = require('./models/question.model');
+const questionsRoute = require('./routes/questions');
+const aiRoute = require('./routes/ai');
+const userRoute = require('./routes/user'); // Import the new user route
+const authRoute = require('./routes/auth'); // Import the auth route
 
 app.use(cors())
+app.use(express.json())
+
+app.use('/api/questions', questionsRoute)
+app.use('/api/ai', aiRoute)
+app.use('/api/user', userRoute); // Use the new user route
+app.use('/api/auth', authRoute); // Use the auth route
+app.use('/uploads', express.static('uploads'));
 
 const PORT = process.env.PORT
 const MONGO_URL = process.env.MONGO_URL;
@@ -36,6 +48,7 @@ mongoose.connect(MONGO_URL, options)
     app.listen(PORT, () => {
         console.log(`\n🚀 Server is running on http://localhost:${PORT}`);
     });
+    app.use('/api/questions', questionsRoute);
 })
 .catch((error) => {
     console.error("\n❌ MongoDB connection error:");

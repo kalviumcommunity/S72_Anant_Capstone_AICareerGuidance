@@ -1,60 +1,42 @@
-require('dotenv').config()
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+function buildPrompt(userAnswers) {
+  let prompt = "You are an AI career counselor. Based on the following user responses, provide career recommendations. The recommendations should be in a JSON array format, where each object in the array has 'career' (string) and 'description' (string) fields. Provide at least 3 recommendations.\n\nUser Responses:\n";
 
-const prompt = `You are an expert career advisor with deep knowledge of various career paths, industry trends, and educational requirements. Your task is to analyze user responses and provide personalized career recommendations in the following structured JSON format:
-
-{
-  "career_recommendations": [
-    {
-      "title": "Software Engineer",
-      "description": "Designs and develops software applications.",
-      "education_requirements": "Bachelor's in Computer Science or a related field",
-      "best_companies": ["Google", "Netflix", "Amazon"],
-      "career_paths": ["Junior Developer", "Software Engineer", "Senior Software Engineer", "Software Architect"],
-      "required_skills": ["Problem-Solving", "Programming", "Data Structures & Algorithms"],
-      "job_outlook": "High demand due to increasing reliance on technology."
+  for (const key in userAnswers) {
+    if (userAnswers.hasOwnProperty(key)) {
+      prompt += `${key}: ${userAnswers[key]}\n`;
     }
-  ]
+  }
+
+  prompt += "\nProvide only the JSON array, no other text or explanation.";
+  return prompt;
 }
 
-### **Guidelines for the AI:**
-1. **Analyze User Preferences**  
-   - Consider their interests, skills, and preferred work environment.
+async function run(userAnswers, apiKey) {
+  const genAI = new GoogleGenerativeAI(apiKey);
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  try {
+    const prompt = buildPrompt(userAnswers);
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+    console.log("AI Raw Response:", text);
 
-2. **Ensure Diversity in Recommendations**  
-   - Provide at least 3 different career recommendations covering different industries.
-   - Suggest both traditional and modern career paths.
-
-3. **Include Career Growth Information**  
-   - Mention entry-level roles, mid-career roles, and senior-level career paths.
-
-4. **Consider Educational Requirements**  
-   - Specify if a degree is required or if alternative pathways (certifications, self-learning) exist.
-
-5. **Job Market Demand & Salary Trends**  
-   - Mention whether the field is growing and include estimated salary ranges.
-
-For now, generate dummy data.
-`;
-
-async function run() {
+    // Attempt to parse the JSON, handle potential issues
     try {
-        const result = await model.generateContent(prompt);
-        let responseText = await result.response.text(); 
-        console.log("Raw Response:", responseText);
-
-        responseText = responseText.replace(/```json|```/g, "").trim();
-        const jsonData = JSON.parse(responseText);
-        console.log("Career Recommendations:", jsonData);
-
-        return jsonData; 
-    } catch (error) {
-        console.error("Error generating content:", error.message);
+      const parsedResult = JSON.parse(text);
+      return parsedResult;
+    } catch (jsonError) {
+      console.error("JSON parsing error:", jsonError);
+      console.error("AI response was not valid JSON:", text);
+      // Fallback for non-JSON responses or errors
+      return [{ career: "Error", description: "Could not parse AI response. Please try again." }];
     }
+  } catch (error) {
+    console.error("Error generating content:", error);
+    throw error;
+  }
 }
-run()
 
-module.exports=run
+module.exports = run;
