@@ -3,6 +3,7 @@ import {Landing,Test,AboutMe,SignUp,Login, Profile} from './Routes/routes'
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import { AuthProvider } from './Components/AuthProvider'
 import ProtectedRoute from './Components/ProtectedRoute'
+import BackToTop from "./Components/BackToTop"
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             </ProtectedRoute>
           }/>
         </Routes>
+        <BackToTop/>
       </AuthProvider>
     </BrowserRouter>
   )
