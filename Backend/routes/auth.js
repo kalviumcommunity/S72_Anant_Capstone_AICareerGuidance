@@ -151,29 +151,7 @@ router.post('/google', async (req, res) => {
   }
 });
 
-// Get current user route (protected)
-router.get('/me', async (req, res) => {
-  try {
-    const token = req.headers.authorization?.split(' ')[1];
-    
-    if (!token) {
-      return res.status(401).json({ message: "No token provided" });
-    }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.userId).select('-password');
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    res.status(200).json({ user });
-
-  } catch (error) {
-    console.error('Get user error:', error);
-    res.status(401).json({ message: "Invalid token" });
-  }
-});
 
 // Logout route (frontend will handle clearing localStorage)
 router.post('/logout', async (req, res) => {
