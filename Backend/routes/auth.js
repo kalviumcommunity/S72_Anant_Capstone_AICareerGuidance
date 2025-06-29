@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 // Signup route
-router.post('/signup', async (req, res) => {
+router.post('/signup', validateEmail,async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
