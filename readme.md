@@ -1,9 +1,14 @@
-
-# 📘 CareerCompass: AI-Powered Career Recommendation Platform
+# 📘 CareerBoat: AI-Powered Career Recommendation Platform
 
 ## 💡 Project Idea & Description
 
-**CareerCompass** is an intelligent career recommendation platform that helps users discover potential career paths based on their interests and personality traits. By answering a personalized quiz, users receive tailored suggestions powered by AI, along with insights into required skills, top companies, and educational paths. The platform is designed to be user-friendly, responsive, and accessible to both students and job seekers.
+**CareerBoat** is an intelligent career recommendation platform that helps users discover potential career paths based on their interests and personality traits. By answering a personalized quiz, users receive tailored suggestions powered by AI, along with insights into required skills, top companies, and educational paths. The platform is designed to be user-friendly, responsive, and accessible to both students and job seekers.
+
+---
+
+## 🚀 Deployed Frontend Link
+
+🔗 [Click here to view the deployed frontend](https://shiny-hamster-04932a.netlify.app/)
 
 ---
 
