@@ -18,6 +18,11 @@ app.use('/api/user', userRoute); // Use the new user route
 app.use('/api/auth', authRoute); // Use the auth route
 app.use('/uploads', express.static('uploads'));
 
+
+app.get('/', (req,res)=>{
+    res.send("Welcome to the Backend of CareerBoat")
+})
+
 const PORT = process.env.PORT
 const MONGO_URL = process.env.MONGO_URL;
 
