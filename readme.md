@@ -35,4 +35,4 @@
 ### **Week 4 – Testing & Final Touches**
 - Test the entire application for bugs and edge cases
 - Polish UI and add responsiveness for all screen sizes
-- Prepare final presentation, deployment, and documentation
+- Prepare final presentation, deployment, and documentation.
