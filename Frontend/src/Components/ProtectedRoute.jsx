@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth } from "./AuthProvider";
 import { Navigate } from "react-router-dom";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -8,7 +9,7 @@ export default function ProtectedRoute({ children }) {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-blue-50">
-        <span className="text-blue-600 font-semibold animate-pulse text-lg">Checking authentication...</span>
+        <LoadingSpinner size="lg" color="blue" message="Checking Authentication..." />
       </div>
     );
   }
