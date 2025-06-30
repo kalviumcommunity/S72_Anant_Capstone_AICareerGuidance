@@ -8,7 +8,7 @@
 
 ## 🚀 Deployed Frontend Link
 
-🔗 [Click here to view the deployed frontend](https://shiny-hamster-04932a.netlify.app/)
+🔗 [Click here to view the deployed frontend](https://careerboat.netlify.app/)
 
 ---
 
