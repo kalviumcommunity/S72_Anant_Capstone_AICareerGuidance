@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
 const router = express.Router();
+const validateEmail=require('../middleware/emailValidator.js');
 
 
 // Signup route
