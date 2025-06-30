@@ -118,4 +118,38 @@ router.post('/submit-response', auth, async (req, res) => {
   }
 });
 
+// PUT endpoint to update user profile
+router.put('/:id', auth, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const paramId = req.params.id;
+    // Only allow users to update their own profile
+    if (userId !== paramId) {
+      return res.status(403).json({ message: 'You can only update your own profile.' });
+    }
+    const { name, email, profilePicture } = req.body;
+    // Validate input (basic)
+    if (!name && !email && !profilePicture) {
+      return res.status(400).json({ message: 'At least one field (name, email, profilePicture) must be provided.' });
+    }
+    const updateFields = {};
+    if (name) updateFields.name = name;
+    if (email) updateFields.email = email;
+    if (profilePicture) updateFields.profilePicture = profilePicture;
+    // Update user
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: updateFields },
+      { new: true, runValidators: true }
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+    res.status(200).json({ message: 'Profile updated successfully.', user: updatedUser });
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    res.status(500).json({ message: 'Server error.' });
+  }
+});
+
 module.exports = router;
