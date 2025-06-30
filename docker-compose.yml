@@ -1,0 +1,21 @@
+services:
+  backend:
+    build: ./Backend
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./Backend/.env
+    restart: unless-stopped
+    networks:
+      - app-network
+  frontend:
+    build: ./Frontend
+    ports:
+      - "4173:4173"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge 
