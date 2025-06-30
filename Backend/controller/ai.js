@@ -52,4 +52,4 @@ async function run(userAnswers) {
   }
 }
 
-module.exports = { run };
+module.exports = { run , buildPrompt};

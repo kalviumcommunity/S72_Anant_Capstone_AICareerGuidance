@@ -20,5 +20,5 @@ const UserResponseModel=new mongoose.Schema({
 })
 
 
-const UserResponse=mongoose.model("UserResponse",ResponseModel)
+const UserResponse=mongoose.model("UserResponse",UserResponseModel)
 module.exports=UserResponse
