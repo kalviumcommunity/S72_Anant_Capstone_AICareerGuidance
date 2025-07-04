@@ -9,7 +9,13 @@ const aiRoute = require('./routes/ai');
 const userRoute = require('./routes/user'); // Import the new user route
 const authRoute = require('./routes/auth'); // Import the auth route
 
-app.use(cors())
+app.use(cors({
+  origin: [
+    'https://careerboat.netlify.app', // Netlify frontend
+    'http://localhost:5173', // local dev (optional)
+  ],
+  credentials: true
+}))
 app.use(express.json())
 
 app.use('/api/questions', questionsRoute)
