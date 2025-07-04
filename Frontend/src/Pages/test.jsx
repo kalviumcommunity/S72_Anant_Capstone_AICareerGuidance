@@ -54,10 +54,14 @@ function Test() {
       }
 
       const requestBody = {
-        answers: Object.entries(answers).map(([questionId, answer]) => ({
-          questionId,
-          answer,
-        })),
+        answers: Object.entries(answers).map(([questionId, answer]) => {
+          const questionObj = questions.find(q => q._id === questionId);
+          return {
+            questionId,
+            questionText: questionObj ? questionObj.text : '',
+            answer,
+          };
+        }),
       };
   
       console.log("🟢 Sending request body:", requestBody); // Debugging Log
