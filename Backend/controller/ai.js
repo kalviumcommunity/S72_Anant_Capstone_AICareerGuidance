@@ -1,17 +1,16 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 function buildPrompt(userAnswers) {
-  let prompt = "You are an AI career counselor. Based on the following user responses, provide career recommendations. The recommendations should be in a JSON array format, where each object in the array has the following fields:\n- 'title' (string, required)\n- 'description' (string, required)\n- 'education_requirements' (string, required)\n- 'best_companies' (array of strings, required)\n- 'career_paths' (array of strings, required)\n- 'required_skills' (array of strings)\n- 'job_outlook' (array of strings)\n\nProvide at least 3 recommendations.\n\nUser Responses:\n";
+  let prompt = "You are an AI career counselor. Based on the following user responses, provide career recommendations. The recommendations should be in a JSON array format, where each object in the array has the following fields:\n- 'title' (string, required)\n- 'description' (string, required)\n- 'education_requirements' (string, required)\n- 'best_companies' (array of strings, required)\n- 'career_paths' (array of strings, required)\n- 'required_skills' (array of strings)\n- 'job_outlook' (array of strings)\n\nProvide at least 3 recommendations.\n\nUser Responses (Question and Answer pairs):\n";
 
-  for (const key in userAnswers) {
-    if (userAnswers.hasOwnProperty(key)) {
-      prompt += `${key}: ${userAnswers[key]}\n`;
-    }
-  }
+  userAnswers.forEach(({ questionText, answer }) => {
+    prompt += `Q: ${questionText}\nA: ${answer}\n`;
+  });
 
   prompt += "\nIMPORTANT: Provide ONLY the JSON array, no other text, explanation, or markdown formatting outside the JSON.";
   return prompt;
 }
+
 
 async function run(userAnswers) {
   apiKey=process.env.API_KEY
