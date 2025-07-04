@@ -22,7 +22,7 @@ function Login() {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post("https://s72-anant-capstone-aicareerguidance.onrender.com/api/auth/login", {
         email,
         password,
       });
@@ -48,7 +48,7 @@ function Login() {
       const { email, displayName } = result.user;
 
       // Send to backend to get/create user and get JWT token
-      const res = await axios.post("http://localhost:5000/api/auth/google", {
+      const res = await axios.post("https://s72-anant-capstone-aicareerguidance.onrender.com/api/auth/google", {
         email,
         name: displayName,
       });

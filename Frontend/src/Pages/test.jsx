@@ -14,7 +14,7 @@ function Test() {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/questions')
+        const res = await axios.get('https://s72-anant-capstone-aicareerguidance.onrender.com/api/questions')
         setQuestions(res.data)
       } catch (err) {
         setError('Failed to fetch questions')
@@ -62,7 +62,7 @@ function Test() {
   
       console.log("🟢 Sending request body:", requestBody); // Debugging Log
   
-      const res = await fetch("http://localhost:5000/api/user/submit-response", {
+      const res = await fetch("https://s72-anant-capstone-aicareerguidance.onrender.com/api/user/submit-response", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -175,7 +175,7 @@ function Test() {
                       <h4 className="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3 border-b pb-2">Education & Outlook</h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-2 md:mt-4">
                         <p><span className="font-bold text-gray-600">Education Required:</span> {rec.education_requirements}</p>
-                        <p><span className="font-bold text-gray-600">Job Outlook:</span> {rec.job_outlook}</p>
+                        <p><span className="font-bold text-gray-600">Job Outlook:</span> {Array.isArray(rec.job_outlook) ? rec.job_outlook.join(' | ') : rec.job_outlook}</p>
                       </div>
                     </div>
                     <div>

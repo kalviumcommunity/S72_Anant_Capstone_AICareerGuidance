@@ -17,12 +17,12 @@ function Profile() {
       try {
         const token = localStorage.getItem('jwtToken');
         if (token) {
-          const res = await axios.get('http://localhost:5000/api/user/profile-pic', {
+          const res = await axios.get('https://s72-anant-capstone-aicareerguidance.onrender.com/api/user/profile-pic', {
             headers: { Authorization: `Bearer ${token}` }
           });
           if (res.data.profilePicUrl) {
-            setProfilePic(`http://localhost:5000${res.data.profilePicUrl}`);
-            localStorage.setItem('profilePicUrl', `http://localhost:5000${res.data.profilePicUrl}`);
+            setProfilePic(`https://s72-anant-capstone-aicareerguidance.onrender.com${res.data.profilePicUrl}`);
+            localStorage.setItem('profilePicUrl', `https://s72-anant-capstone-aicareerguidance.onrender.com${res.data.profilePicUrl}`);
           } else {
             setProfilePic('/default-profile.png');
           }
@@ -42,7 +42,7 @@ function Profile() {
           setLoading(false);
           return;
         }
-        const res = await axios.get('http://localhost:5000/api/user/tests', {
+        const res = await axios.get('https://s72-anant-capstone-aicareerguidance.onrender.com/api/user/tests', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setTests(res.data.tests || []);
@@ -80,14 +80,14 @@ function Profile() {
     formData.append('profilePicture', selectedFile);
     try {
       const token = localStorage.getItem('jwtToken');
-      const res = await axios.post('http://localhost:5000/api/user/upload-profile-pic', formData, {
+      const res = await axios.post('https://s72-anant-capstone-aicareerguidance.onrender.com/api/user/upload-profile-pic', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`
         },
       });
-      setProfilePic(`http://localhost:5000${res.data.profilePicUrl}`);
-      localStorage.setItem('profilePicUrl', `http://localhost:5000${res.data.profilePicUrl}`);
+      setProfilePic(`https://s72-anant-capstone-aicareerguidance.onrender.com${res.data.profilePicUrl}`);
+      localStorage.setItem('profilePicUrl', `https://s72-anant-capstone-aicareerguidance.onrender.com${res.data.profilePicUrl}`);
       setUploadMsg('Profile picture updated successfully!');
       setSelectedFile(null);
     } catch (error) {

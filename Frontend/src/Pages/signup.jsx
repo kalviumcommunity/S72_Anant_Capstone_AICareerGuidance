@@ -27,7 +27,7 @@ function SignUp() {
     }
     
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/signup", {
+      const res = await axios.post("https://s72-anant-capstone-aicareerguidance.onrender.com/api/auth/signup", {
         name,
         email,
         password,
@@ -53,7 +53,7 @@ function SignUp() {
         const { email, displayName } = result.user;
 
         // Send to backend to get/create user and get JWT token
-        const res = await axios.post("http://localhost:5000/api/auth/google", {
+        const res = await axios.post("https://s72-anant-capstone-aicareerguidance.onrender.com/api/auth/google", {
           email,
           name: displayName,
         });
