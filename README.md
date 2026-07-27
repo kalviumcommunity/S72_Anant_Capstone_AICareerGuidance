@@ -1,349 +1,370 @@
-# 🚀 CareerBoat: AI-Powered Career Guidance System
+# CareerBoat: AI-Powered Career Guidance Platform
 
 <div align="center">
 
-![Career Guidance](https://img.shields.io/badge/AI-Career%20Guidance-blue)
-![React](https://img.shields.io/badge/React-19.0.0-61DAFB?logo=react)
-![Node.js](https://img.shields.io/badge/Node.js-Express-green?logo=node.js)
-![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248?logo=mongodb)
-![Google AI](https://img.shields.io/badge/AI-Google%20Gemini-4285F4?logo=google)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+![Career Guidance](https://img.shields.io/badge/AI-Career%20Guidance-blue?style=flat-square&logo=google)
+![React](https://img.shields.io/badge/React-19.0.0-61DAFB?style=flat-square&logo=react)
+![Vite](https://img.shields.io/badge/Vite-6.2.0-646CFF?style=flat-square&logo=vite)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind--CSS-v4.0.14-38B2AC?style=flat-square&logo=tailwind-css)
+![Node.js](https://img.shields.io/badge/Node.js-Express-green?style=flat-square&logo=node.js)
+![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248?style=flat-square&logo=mongodb)
+![Google Gemini](https://img.shields.io/badge/AI-Gemini%202.5%20Flash-4285F4?style=flat-square&logo=google)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
-**An intelligent career recommendation platform that helps users discover their ideal career paths through AI-powered personalized assessments.**
+An intelligent, full-stack career recommendation platform that provides personalized career guidance based on user personality, interests, and skills powered by Google Gemini 2.5 Flash AI.
 
-[🌐 Live Demo](https://careerboat.netlify.app/) • [📖 Documentation](#documentation) • [🐛 Report Bug](#contributing) • [✨ Request Feature](#contributing)
+[Live Frontend Demo](https://careerboat.netlify.app/) • [Live Backend API](https://s72-anant-capstone-aicareerguidance.onrender.com) • [Documentation](#table-of-contents)
 
 </div>
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
-- [Features](#features)
+- [Key Features](#key-features)
 - [Tech Stack](#tech-stack)
-- [Architecture](#architecture)
+- [System Architecture](#system-architecture)
+- [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
   - [Environment Variables](#environment-variables)
-- [Usage](#usage)
+  - [Local Installation](#local-installation)
+  - [Running with Docker Compose](#running-with-docker-compose)
 - [API Documentation](#api-documentation)
-- [Docker Deployment](#docker-deployment)
-- [Project Structure](#project-structure)
-- [Development Roadmap](#development-roadmap)
+- [AI Recommendation Pipeline](#ai-recommendation-pipeline)
+- [Testing](#testing)
+- [Deployment](#deployment)
 - [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+- [License & Contact](#license--contact)
 
 ---
 
-## 🎯 Overview
+## Overview
 
-**CareerBoat** is a capstone project designed to revolutionize career guidance through artificial intelligence. By combining personality assessments, interest analysis, and AI-powered recommendations, CareerBoat provides users with:
+CareerBoat is a modern web application designed to assist students and professionals in identifying suitable career paths. By combining structured assessment questionnaires, user authentication, and artificial intelligence, CareerBoat provides personalized career insights and technical roadmaps.
 
-- 🎓 Personalized career path suggestions
-- 💼 Industry insights and job market trends
-- 📚 Required skills and educational pathways
-- 🏢 Top companies and opportunities in recommended fields
-- 🤖 AI-powered chatbot for career queries
-
-This platform serves both students exploring career options and professionals considering career transitions.
+### Application Workflow:
+1. **Interactive Assessment**: Authenticated users complete a multi-question assessment evaluating interests, skills, and technical preferences.
+2. **AI Processing**: User responses are evaluated using Google's `gemini-2.5-flash` model via tailored prompt engineering.
+3. **Structured Roadmaps**: The platform generates customized recommendations covering target job roles, required education, career progression paths, essential skills, top hiring companies, and market outlooks.
+4. **Dashboard & Profile Management**: Assessment results are persisted to MongoDB for ongoing review, alongside user profile picture management.
 
 ---
 
-## ✨ Features
+## Key Features
 
-### Core Functionality
-- **🧠 Intelligent Quiz System**: Dynamic questionnaire that adapts to user responses
-- **🤖 AI-Powered Recommendations**: Leverages Google Gemini AI for accurate career matching
-- **👤 User Authentication**: Secure login/signup with JWT and bcrypt encryption
-- **📊 Personalized Dashboard**: Track quiz history and recommendations
-- **🔐 Secure Data Storage**: MongoDB integration with encrypted sensitive data
-
-### Advanced Features
-- **📱 Responsive Design**: Seamless experience across all devices
-- **🎨 Modern UI/UX**: Built with React and Tailwind CSS
-- **⚡ Fast Performance**: Optimized with Vite bundler
-- **🔄 Real-time Updates**: Dynamic content loading and state management
-- **📤 File Upload Support**: Resume/CV upload with Multer
-- **🔥 Firebase Integration**: Authentication and cloud services
+- **Dynamic Career Assessment**: Interactive quiz system with step-by-step navigation and progress tracking.
+- **Google Gemini AI Integration**: Real-time evaluation of assessment responses to generate structured JSON career recommendations.
+- **Authentication System**: Supports local email/password registration (with email format validation) and Google OAuth authentication via Firebase.
+- **User Dashboard & History**: Persisted test history allowing users to review prior assessment results at any time.
+- **Profile Picture Uploads**: Avatar management supporting image uploads processed via Multer and served statically.
+- **Protected Routing**: Client-side route guards enforcing JWT token authentication for sensitive pages.
+- **Responsive UI/UX**: Designed using Tailwind CSS v4 to deliver a consistent experience across desktop and mobile browsers.
+- **Containerized Infrastructure**: Docker and Docker Compose configuration for simplified local and server deployment.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
-- **Framework**: React 19.0.0
-- **Build Tool**: Vite 6.2.0
-- **Styling**: Tailwind CSS 4.0.14
-- **Routing**: React Router DOM 7.3.0
-- **HTTP Client**: Axios 1.8.4
-- **Authentication**: Firebase 11.5.0
+- **Framework**: React (v19.0.0)
+- **Build Tool**: Vite (v6.2.0)
+- **Styling**: Tailwind CSS (v4.0.14)
+- **Routing**: React Router DOM (v7.3.0)
+- **HTTP Client**: Axios (v1.8.4)
+- **Authentication Client**: Firebase SDK (v11.5.0)
 
 ### Backend
 - **Runtime**: Node.js
-- **Framework**: Express.js 4.21.2
-- **Database**: MongoDB with Mongoose 8.12.1
-- **AI Integration**: Google Generative AI 0.24.1
-- **Authentication**: JWT (JSON Web Tokens) 9.0.2
-- **Password Hashing**: Bcrypt 5.1.1
-- **File Upload**: Multer 2.0.1
+- **Framework**: Express.js (v4.21.2)
+- **Database**: MongoDB with Mongoose (v8.12.1)
+- **AI SDK**: Google Generative AI (`@google/generative-ai` v0.24.1) — Model: `gemini-2.5-flash`
+- **Security & Authentication**: JSON Web Tokens (`jsonwebtoken` v9.0.2), `bcrypt` (v5.1.1), `bcryptjs` (v3.0.2)
+- **File Processing**: Multer (v2.0.1)
 
-### DevOps & Tools
+### Infrastructure & Tooling
 - **Containerization**: Docker & Docker Compose
-- **Version Control**: Git & GitHub
-- **Testing**: Jest 29.7.0
-- **Development**: Nodemon 3.1.9
-- **Linting**: ESLint 9.21.0
+- **Backend Deployment**: Render (`https://s72-anant-capstone-aicareerguidance.onrender.com`)
+- **Frontend Deployment**: Netlify (`https://careerboat.netlify.app/`)
+- **Testing**: Jest (v29.7.0)
 
 ---
 
-## 🏗️ Architecture
+## System Architecture
 
 ```
-┌─────────────────┐         ┌─────────────────┐         ┌─────────────────┐
-│                 │         │                 │         │                 │
-│  React Frontend │◄───────►│  Express API    │◄───────►│  MongoDB        │
-│  (Vite)         │         │  Server         │         │  Database       │
-│                 │         │                 │         │                 │
-└─────────────────┘         └────────┬────────┘         └─────────────────┘
-                                     │
-                                     │
-                            ┌────────▼────────┐
-                            │                 │
-                            │  Google Gemini  │
-                            │  AI API         │
-                            │                 │
-                            └─────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                                                             │
+│                            React 19 Frontend (Vite)                         │
+│                           https://careerboat.netlify.app                    │
+│                                                                             │
+└───────┬───────────────────────────────┬──────────────────────────────┬──────┘
+        │                               │                              │
+        │ Authentication                │ REST API Requests            │ Google OAuth
+        ▼                               ▼                              ▼
+┌──────────────────┐           ┌──────────────────┐          ┌──────────────────┐
+│                  │           │   Node / Express │          │  Firebase Auth   │
+│   Local Storage  │           │   Backend Server │          │  Google Provider │
+│  (JWT Token Info)│           │   (Render API)   │          └──────────────────┘
+└──────────────────┘           └────────┬─────────┘
+                                        │
+                         ┌──────────────┴──────────────┐
+                         │                             │
+                         ▼                             ▼
+              ┌─────────────────────┐       ┌─────────────────────┐
+              │  MongoDB Database   │       │ Google Gemini AI    │
+              │ (Users, Questions,  │       │ (gemini-2.5-flash)  │
+              │  Test History)      │       └─────────────────────┘
+              └─────────────────────┘
 ```
 
 ---
 
-## 🚀 Getting Started
+## Project Structure
+
+```
+S72_Anant_Capstone_AICareerGuidance/
+├── Backend/
+│   ├── controller/
+│   │   ├── ai.js                # Gemini AI prompt builder and model execution
+│   │   └── ai.test.js           # Controller unit tests
+│   ├── middleware/
+│   │   ├── auth.js              # JWT authorization middleware
+│   │   └── emailValidator.js    # Email syntax validation middleware
+│   ├── models/
+│   │   ├── user.model.js        # User data schema
+│   │   ├── question.model.js    # Question data schema
+│   │   ├── result.model.js      # Assessment result schema
+│   │   ├── test.model.js        # Test schema
+│   │   └── *.test.js            # Model validation unit tests
+│   ├── routes/
+│   │   ├── ai.js                # Direct AI recommendation route
+│   │   ├── auth.js              # User authentication routes
+│   │   ├── questions.js         # Questions fetch route
+│   │   └── user.js              # Assessment submission, test history, profile routes
+│   ├── uploads/                 # Static uploads storage
+│   ├── Dockerfile               # Backend Docker container build configuration
+│   ├── package.json             # Backend dependencies and scripts
+│   └── server.js                # Application entry point and database connection
+├── Frontend/
+│   ├── public/
+│   │   └── _redirects           # Netlify single-page application rewrite rules
+│   ├── src/
+│   │   ├── assets/              # Logos, hero images, and static graphics
+│   │   ├── Components/
+│   │   │   ├── AuthProvider.jsx # Authentication state provider
+│   │   │   ├── ProtectedRoute.jsx# Navigation guard component
+│   │   │   ├── header.jsx       # Header container component
+│   │   │   ├── nav.jsx          # Top navigation bar
+│   │   │   ├── footer.jsx       # Footer component
+│   │   │   ├── BackToTop.jsx    # Scroll control component
+│   │   │   └── LoadingSpinner.jsx # Loading state indicator
+│   │   ├── Pages/
+│   │   │   ├── landing.jsx      # Application landing page
+│   │   │   ├── test.jsx         # Assessment interface and results view
+│   │   │   ├── Profile.jsx      # User profile and history management
+│   │   │   ├── aboutMe.jsx      # Platform and overview page
+│   │   │   ├── login.jsx        # Login page
+│   │   │   └── signup.jsx       # User registration page
+│   │   ├── Routes/
+│   │   │   └── routes.js        # Centralized route exports
+│   │   ├── Styles/
+│   │   │   └── Styles.css       # Global styles and Tailwind directives
+│   │   ├── firebase.js          # Firebase client initialization
+│   │   ├── App.jsx              # Application router setup
+│   │   └── main.jsx             # React DOM entry point
+│   ├── Dockerfile               # Frontend Docker preview server build configuration
+│   ├── vite.config.js           # Vite build configuration
+│   └── package.json             # Frontend dependencies and scripts
+├── docker-compose.yml           # Multi-container orchestration specification
+├── README.md                    # Primary repository documentation
+└── readme.md                    # Repository documentation
+```
+
+---
+
+## Getting Started
 
 ### Prerequisites
 
-Ensure you have the following installed:
+The following software dependencies are required:
+- **Node.js** (v18.0.0 or higher)
+- **npm** (v9.0.0 or higher)
+- **MongoDB** (Local instance or MongoDB Atlas cluster connection)
+- **Google AI API Key** (Access key for Google Gemini API)
+- **Docker & Docker Compose** (Optional, for containerized execution)
 
-- **Node.js** (v18.x or higher)
-- **npm** or **yarn**
-- **MongoDB** (local or MongoDB Atlas)
-- **Docker** (optional, for containerized deployment)
-- **Google AI API Key** (for Gemini integration)
+---
 
-### Installation
+### Environment Variables
 
-1. **Clone the repository**
+Configure environment variables in the corresponding `Backend` and `Frontend` directories:
+
+#### Backend (`Backend/.env`)
+```env
+PORT=5000
+MONGO_URL=mongodb://localhost:27017/careerboat
+JWT_SECRET=your_jwt_secret_key_here
+API_KEY=your_google_gemini_api_key
+```
+
+#### Frontend (`Frontend/.env`)
+```env
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+```
+
+---
+
+### Local Installation
+
+1. **Clone the repository**:
    ```bash
    git clone https://github.com/kalviumcommunity/S72_Anant_Capstone_AICareerGuidance.git
    cd S72_Anant_Capstone_AICareerGuidance
    ```
 
-2. **Install Backend Dependencies**
+2. **Backend Setup**:
    ```bash
    cd Backend
    npm install
+   npm run dev
    ```
+   *Express backend server will listen on `http://localhost:5000`.*
 
-3. **Install Frontend Dependencies**
+3. **Frontend Setup**:
    ```bash
    cd ../Frontend
    npm install
+   npm run dev
    ```
+   *Vite development server will listen on `http://localhost:5173`.*
 
-### Environment Variables
+---
 
-Create `.env` files in both Backend and Frontend directories:
+### Running with Docker Compose
 
-#### Backend `.env`
-```env
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/careerboat
-JWT_SECRET=your_jwt_secret_key_here
-JWT_EXPIRE=7d
-GOOGLE_AI_API_KEY=your_google_ai_api_key
-NODE_ENV=development
-CORS_ORIGIN=http://localhost:5173
+To build and run the services using Docker containers:
+
+```bash
+# Build and run containers
+docker-compose up --build
+
+# Run in background (detached mode)
+docker-compose up -d
+
+# Stop running containers
+docker-compose down
 ```
 
-#### Frontend `.env`
-```env
-VITE_API_URL=http://localhost:5000/api
-VITE_FIREBASE_API_KEY=your_firebase_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
-VITE_FIREBASE_PROJECT_ID=your_firebase_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
-VITE_FIREBASE_APP_ID=your_firebase_app_id
+- **Backend Container**: Bound to port `5000`
+- **Frontend Container**: Bound to port `4173`
+
+---
+
+## API Documentation
+
+### Base URL: `https://s72-anant-capstone-aicareerguidance.onrender.com` (or `http://localhost:5000`)
+
+### Authentication Endpoints (`/api/auth`)
+
+| Method | Endpoint | Authorization | Description |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/auth/signup` | Public | Registers a new user account (`name`, `email`, `password`). Includes email regex validation. |
+| `POST` | `/api/auth/login` | Public | Authenticates user credentials and returns a JWT token. |
+| `POST` | `/api/auth/google` | Public | Synchronizes Google OAuth authentication and returns a JWT token. |
+| `GET` | `/api/auth/me` | Protected | Fetches current user profile using `Bearer <JWT_TOKEN>`. |
+| `POST` | `/api/auth/logout` | Public | Logs out the current user session. |
+
+### Question Endpoints (`/api/questions`)
+
+| Method | Endpoint | Authorization | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/questions` | Public | Retrieves all active career assessment questions. |
+
+### AI Recommendation Endpoints (`/api/ai`)
+
+| Method | Endpoint | Authorization | Description |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/ai/recommend` | Public | Accepts raw question-answer pairs to generate career recommendations directly via Gemini API. |
+
+### User & Profile Endpoints (`/api/user`)
+
+| Method | Endpoint | Authorization | Description |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/user/submit-response` | Protected | Submits test answers, triggers Gemini AI analysis, records results to `testHistory`, and returns recommendations. |
+| `GET` | `/api/user/tests` | Protected | Fetches historical assessment records for the authenticated user. |
+| `GET` | `/api/user/profile-pic` | Protected | Returns the profile picture URL for the authenticated user. |
+| `POST` | `/api/user/upload-profile-pic` | Protected | Accepts profile image upload (max 5MB, JPG/PNG format). |
+| `PUT` | `/api/user/:id` | Protected | Updates user profile fields (`name`, `email`, `profilePicture`). |
+
+---
+
+## AI Recommendation Pipeline
+
+CareerBoat integrates Google's `gemini-2.5-flash` model for intelligent recommendations:
+
+1. User responses are formatted into structured question-answer pairs.
+2. A system prompt establishes the AI persona as a career guidance advisor.
+3. Output is constrained to parseable JSON matching the following schema:
+
+```json
+[
+  {
+    "title": "Full-Stack Web Developer",
+    "description": "Designs and develops modern full-stack web applications...",
+    "education_requirements": "Bachelor's Degree in Computer Science or relevant coding bootcamp",
+    "best_companies": ["Google", "Microsoft", "Meta", "Amazon"],
+    "career_paths": ["Junior Developer", "Full-Stack Engineer", "Lead Architect", "CTO"],
+    "required_skills": ["React", "Node.js", "TypeScript", "MongoDB", "REST APIs"],
+    "job_outlook": ["High demand", "15% projected growth over 10 years"]
+  }
+]
 ```
 
 ---
 
-## 💻 Usage
+## Testing
 
-### Development Mode
+Backend unit tests are managed using **Jest**.
 
-**Terminal 1 - Start Backend Server:**
-```bash
-cd Backend
-npm run dev
-```
-Backend runs on `http://localhost:5000`
-
-**Terminal 2 - Start Frontend Development Server:**
-```bash
-cd Frontend
-npm run dev
-```
-Frontend runs on `http://localhost:5173`
-
-### Production Build
-
-**Build Frontend:**
-```bash
-cd Frontend
-npm run build
-```
-
-**Start Backend in Production:**
-```bash
-cd Backend
-npm start
-```
-
-### Running Tests
+Run the test suite:
 
 ```bash
 cd Backend
 npm test
 ```
 
----
-
-## 📡 API Documentation
-
-### Authentication Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/register` | Register a new user |
-| POST | `/api/auth/login` | Login user |
-| GET | `/api/auth/profile` | Get user profile (Protected) |
-| PUT | `/api/auth/profile` | Update user profile (Protected) |
-
-### Quiz Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/quiz/questions` | Get quiz questions |
-| POST | `/api/quiz/submit` | Submit quiz responses |
-| GET | `/api/quiz/history` | Get user quiz history (Protected) |
-
-### Recommendation Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/recommendations` | Get AI career recommendations |
-| GET | `/api/recommendations/:id` | Get specific recommendation |
+Test coverage includes:
+- Mongoose Schema validation rules (`user.model.test.js`, `question.model.test.js`, `result.model.test.js`, `test.model.test.js`, `userResponse.model.test.js`)
+- AI Controller prompt formation and response parsing logic (`ai.test.js`)
 
 ---
 
-## 🐳 Docker Deployment
+## Deployment
 
-The project includes Docker support for easy deployment:
-
-```bash
-# Build and run with Docker Compose
-docker-compose up --build
-
-# Run in detached mode
-docker-compose up -d
-
-# Stop containers
-docker-compose down
-```
-
-The `docker-compose.yml` configuration sets up:
-- Frontend container
-- Backend container
-- MongoDB container
-- Networking between services
+- **Frontend**: Hosted on [Netlify](https://careerboat.netlify.app/)
+  - Single-page application route fallback configured in `Frontend/public/_redirects`.
+- **Backend**: Hosted on [Render](https://s72-anant-capstone-aicareerguidance.onrender.com)
+  - Connected to a managed MongoDB Atlas database instance.
+- **Container Infrastructure**: Dockerized using standard `Dockerfile`s and `docker-compose.yml`.
 
 ---
 
-## 📁 Project Structure
+## Contributing
 
-```
-S72_Anant_Capstone_AICareerGuidance/
-├── Backend/
-│   ├── controllers/          # Route controllers
-│   ├── models/              # MongoDB schemas
-│   ├── routes/              # API routes
-│   ├── middleware/          # Custom middleware
-│   ├── config/              # Configuration files
-│   ├── utils/               # Utility functions
-│   ├── server.js            # Express server entry point
-│   └── package.json         # Backend dependencies
-├── Frontend/
-│   ├── src/
-│   │   ├── components/      # React components
-│   │   ├── pages/           # Page components
-│   │   ├── services/        # API service layer
-│   │   ├── hooks/           # Custom React hooks
-│   │   ├── context/         # Context providers
-│   │   ├── utils/           # Helper functions
-│   │   ├── assets/          # Static assets
-│   │   ├── App.jsx          # Main App component
-│   │   └── main.jsx         # React entry point
-│   ├── public/              # Public static files
-│   └── package.json         # Frontend dependencies
-├── docker-compose.yml       # Docker configuration
-└── README.md               # Project documentation
-```
-
----
-
-## 🤝 Contributing
-
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/FeatureName`)
+3. Commit changes (`git commit -m 'Add FeatureName'`)
+4. Push to branch (`git push origin feature/FeatureName`)
 5. Open a Pull Request
 
-
-
 ---
 
-## 👨‍💻 Contact
+## License & Contact
 
-**Anant** - [@Anant3008](https://github.com/Anant3008)
+Distributed under the **MIT License**.
 
-**Project Link**: [https://github.com/kalviumcommunity/S72_Anant_Capstone_AICareerGuidance](https://github.com/kalviumcommunity/S72_Anant_Capstone_AICareerGuidance)
-
-**Live Demo**: [https://careerboat.netlify.app/](https://careerboat.netlify.app/)
-
----
-
-## 🙏 Acknowledgments
-
-- [Google Gemini AI](https://ai.google.dev/) - For powering the recommendation engine
-- [Kalvium](https://www.kalvium.com/) - For the capstone opportunity
-- [React Documentation](https://react.dev/)
-- [Express.js](https://expressjs.com/)
-- [MongoDB](https://www.mongodb.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Firebase](https://firebase.google.com/)
-
----
-
-<div align="center">
-
-**Made with ❤️ by Anant**
-
-⭐ Star this repo if you find it helpful!
-
-</div>
+- **Author**: Anant ([@Anant3008](https://github.com/Anant3008))
+- **Repository**: [kalviumcommunity/S72_Anant_Capstone_AICareerGuidance](https://github.com/kalviumcommunity/S72_Anant_Capstone_AICareerGuidance)
+- **Live Demo**: [https://careerboat.netlify.app/](https://careerboat.netlify.app/)
